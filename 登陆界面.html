@@ -6,19 +6,23 @@
 </head>
     <main>
       <div class="Interface-header">
-        <h3 class="text-center font-weight-light my-4">欢迎来到管理员登录界面</h3></div>
+        <h3 class="text-center font-weight-light my-4"><strong>欢迎来到管理员登录界面</strong></h3></div>
       <div class="Interface-body">
         <form th:action="@{/登陆界面}" method="post" name="loginForm"
               onsubmit="return checkSubmit(this)">
           <div class="form-floating mb-3">
-            <label for="inputAccount">账号</label>
+            <label for="inputAccount">
+              账号
+            </label>
             <input class="form-control" id="inputAccount" name="adminAccount" type="account"
-                   placeholder="Account"/>
+                   placeholder="请输入账号"/>
           </div>
           <div class="form-floating mb-3">
-            <label for="inputPassword">密码</label>
+            <label for="inputPassword">
+              密码
+            </label>
             <input class="form-control" id="inputPassword" name="adminPassword"
-                   type="password"
+                   type="请输入密码"
                    placeholder="Password"/>
           </div>
           <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
@@ -35,7 +39,7 @@
 
     </main>
 
-    <!--若未输入则报错-->
+<!--若未输入则报错-->
     <script type="text/javascript">
       function checkSubmit(loginForm) {
         if (loginForm.adminAccount.value == '') {
@@ -51,5 +55,16 @@
         return true;
       }
 </script>
+<!--增加作者区域-->
+&copy 爬行者大队;
+<!--增加跳转github以及QQ链接-->
+<br>
+  <a href="tencent://message/?uin=1054173274&Site=&Menu=yes">欢迎咨询QQ</a>
+</br>
+<br>
+  <a href="https://github.com/Jing0417/Gym-Management-System">  <input type="image" src="../img/R-C%20(1).jpg" width="20" height="20"></a>
+
+
+</br>
 </body>
 </html>
