@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.milotnt.mapper.EquipmentMapper">
+
+    <select id="findAll" resultType="equipment">
+        SELECt *
+        FROM equipment
+    </select>
+
+    <delete id="deleteByEquipmentId" parameterType="java.lang.Integer">
+        DELETE
+        FROM equipment
+        WHERE Equ_id = #{equipmentId}
+    </delete>
+
+    <insert id="insertEquipment" parameterType="equipment">
+        INSERT INTO equipment (Equ_id, Equ_name, Equ_location, Equ_status, Equ_message)
+        VALUES (#{equipmentId}, #{equipmentName}, #{equipmentLocation}, #{equipmentStatus}, #{equipmentMessage})
+    </insert>
+
+    <update id="updateEquipmentByEquipmentId" parameterType="equipment">
+        UPDATE equipment
+        SET Equ_id       = #{equipmentId},
+            Equ_name     = #{equipmentName},
+            Equ_location = #{equipmentLocation},
+            Equ_status   = #{equipmentStatus},
+            Equ_message  = #{equipmentMessage}
+        WHERE Equ_id = #{equipmentId}
+    </update>
+
+    <select id="selectByEquipmentId" parameterType="java.lang.Integer" resultType="equipment">
+        SELECT *
+        FROM equipment
+        WHERE Equ_id = #{equipmentId}
+    </select>
+
+    <select id="selectTotalCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM equipment
+    </select>
+
+</mapper>
