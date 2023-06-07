@@ -1,0 +1,109 @@
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+
+
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE `admin`  (
+  `Admin_Account` int not NULL,
+  `Admin_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`Admin_Account`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+INSERT INTO `admin` VALUES (1, '123');
+INSERT INTO `admin` VALUES (2, '123');
+INSERT INTO `admin` VALUES (3, '123');
+
+
+DROP TABLE IF EXISTS `class_table`;
+CREATE TABLE `class_table`  (
+  `Class_id` int NOT NULL AUTO_INCREMENT,
+  `Class_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `Class_starttime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `Class_time` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `Coach` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`Class_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+INSERT INTO `class_table` VALUES (0001, '增肌', '2023-05-15 8:00', '120mins', '李弈成');
+INSERT INTO `class_table` VALUES (0002, '减脂', '2023-05-18 10:00', '120mins', '陈立农');
+
+
+DROP TABLE IF exists `schedule`;
+CREATE TABLE `schedule` (
+`Class_order_id`  int NOT NULL AUTO_INCREMENT,
+`Class_id` int NOT NULL ,
+`Class_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+`Coach` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+ `VIP_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+ `VIP_account` int not null,
+`Class_starttime` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+ primary key(`Class_order_id`)using btree
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+
+
+INSERT INTO `schedule` VALUES (1, 0001, '增肌', '李弈成', '姚凯俊', 03, '2023.5.20 10:00');
+INSERT INTO `schedule` VALUES (2, 0002, '减脂', '陈立农', '李瀛东', 01, '2023.5.20 8:00');
+
+
+
+DROP TABLE IF EXISTS `VIP`;
+CREATE TABLE `VIP`  (
+  `VIP_account` int not null,
+  `VIP_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `VIP_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `VIP_gender` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `VIP_age`int NULL DEFAULT NULL,
+  `VIP_height` int NULL DEFAULT NULL,
+  `VIP_weight` int NULL DEFAULT NULL,
+  `VIP_phonenumber` bigint NULL DEFAULT NULL COMMENT '会员电话',
+  `Card_time` date not null,
+  `Card_class` int NOT NULL ,
+  `Card_nextclass` int not null,
+  PRIMARY KEY (`Vip_account`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+
+INSERT INTO `VIP` VALUES (01, '123', '李瀛东', '男', 21, 182, 70, 110, '2023-05-15', 40, 40);
+INSERT INTO `VIP` VALUES (02, '123', '刘海城', '男', 21, 182, 70, 120, '2023-04-15', 50, 50);
+INSERT INTO `VIP` VALUES (03, '123', '姚凯俊', '男', 21, 188, 70, 119, '2023-05-15', 40, 40);
+INSERT INTO `VIP` VALUES (04, '123', '敬沅坤', '男', 21, 188, 70, 10086, '2023-05-15', 30, 30);
+
+
+DROP TABLE IF EXISTS `employee`;
+CREATE TABLE `employee`  (
+  `Emp_account` int(50) NOT NULL,
+  `Emp_name` varchar(50) character SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `Emp_gender` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `Emp_age` int(10) NULL DEFAULT NULL,
+  `Emp_time` date NULL DEFAULT NULL COMMENT '入职时间',
+  `staff` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '职务',
+  `Emp_message` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '备注信息',
+  PRIMARY KEY (`Emp_account`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+
+INSERT INTO `employee` VALUES (001,  '李弈成', '男', 20, '2023-05-15', '教练', '细狗');
+INSERT INTO `employee` VALUES (002,  '吴亦凡', '男', 32, '2021-07-31', '保洁', '保洁王');
+insert into `employee` values(003, '陈立农', '男','28', '2023.5.20', '教练', '');
+
+
+DROP TABLE IF EXISTS `equipment`;
+CREATE TABLE `equipment`  (
+  `Equ_id` int NOT NULL,
+  `Equ_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `Equ_location` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `Equ_state` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL comment '正常/需要维修/正在维修',
+  
+  
+  PRIMARY KEY (`Equ_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+INSERT INTO `equipment` VALUES (1, '哑铃', '无氧区', '正常');
+INSERT INTO `equipment` VALUES (2, '杠铃', '无氧区', '需要维修');
+insert into `equipment` values (3, '跑步机','有氧区', '正在维修');
+
+
+
+
+SET FOREIGN_KEY_CHECKS = 1;

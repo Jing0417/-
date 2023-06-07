@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.milotnt.mapper.MemberMapper">
+
+    <select id="findAll" resultType="vip">
+        SELECT *
+        FROM vip
+    </select>
+
+    <insert id="insertVIP" parameterType="vip">
+        INSERT INTO VIP (VIP_account, VIP_name, VIP_gender, VIP_age, VIP_height,
+        VIP_weight, VIP_phone, Card_time, Card_class,
+        Card_nextclass)
+        VALUES (#{vipAccount}, #{vipName}, #{vipGender}, #{vipAge}, #{vipHeight},
+        #{vipWeight}, #{vipPhone}, #{cardTime}, #{cardClass}, #{cardNextClass})
+    </insert>
+
+    <update id="updateVIPByVIPAccount" parameterType="vip">
+        UPDATE VIP
+        SET VIP_account  = #{vipAccount},
+        VIP_password = #{vipPassword},
+        VIP_name     = #{vipName},
+        VIP_gender   = #{vipGender},
+        VIP_age      = #{vipAge},
+        VIP_height   = #{vipHeight},
+        VIP_weight   = #{vipWeight},
+        VIP_phone    = #{vipPhone},
+        Card_class      = #{cardClass},
+        Card_nextclass = #{cardNextClass}
+        WHERE VIP_account = #{vipAccount}
+    </update>
+
+    <select id="selectByAccountAndPassword" resultType="vip">
+        SELECT *
+        FROM member
+        WHERE VIP_account = #{vipAccount}
+        AND VIP_password = #{vipPassword}
+    </select>
+
+    <delete id="deleteByVIPAccount" parameterType="java.lang.Integer">
+        DELETE
+        FROM VIP
+        WHERE VIP_account = #{vipAccount}
+    </delete>
+
+    <select id="selectTotalCount" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM VIP
+    </select>
+
+    <select id="selectByVIPAccount" parameterType="java.lang.Integer" resultType="vip">
+        SELECT *
+        FROM VIP
+        WHERE VIP_account = #{vipAccount}
+    </select>
+
+</mapper>

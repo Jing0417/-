@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.milotnt.mapper.ScheduleMapper">
+
+    <select id="findAll" resultType="schedule">
+        SELECT *
+        FROM schedule
+    </select>
+
+    <insert id="insertSchedule" parameterType="schedule">
+        INSERT INTO class_order(Class_order_id, Class_id, Class_name, Coach, VIP_name, VIP_account, Class_starttime)
+        VALUES (#{scheduleId}, #{classId}, #{className}, #{coach}, #{vipName}, #{vipAccount}, #{classStarttime})
+    </insert>
+
+    <select id="selectScheduleByVIPAccount" parameterType="java.lang.Integer" resultType="schedule">
+        SELECT *
+        FROM schedule
+        WHERE VIP_account = #{vipAccount}
+    </select>
+
+    <delete id="deleteByScheduleId" parameterType="java.lang.Integer">
+        DELETE
+        FROM schedule
+        WHERE Class_order_id = #{classOrderId}
+    </delete>
+
+    <select id="selectVIPByClassIdAndVIPAccount" parameterType="java.lang.Integer" resultType="schedule">
+        SELECT *
+        FROM schedule
+        WHERE Class_id = #{classId}
+        AND VIP_account = #{vipAccount}
+    </select>
+
+    <select id="selectVIPScheduleList" parameterType="java.lang.Integer" resultType="schedule">
+        SELECT *
+        FROM schedule
+        WHERE Class_id = #{classId}
+    </select>
+
+
+</mapper>
