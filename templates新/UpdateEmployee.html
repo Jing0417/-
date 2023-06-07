@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-员工信息更新</title>
+</head>
+<body>
+
+<main>
+    <div>
+        <h1 class="mt-4">编辑员工信息</h1>
+
+        <ol>
+                        <li><a th:href="@{/toAdminMain}">主页</a></li>
+                        <li><a th:href="@{/Emp/selEmployee}">员工管理</a></li>
+<!--            <a href="AdminMain.html" target="_self">回到主界面</a>-->
+<!--            <a href="SelectEmp.html" target="_self">回到员工管理界面</a>-->
+            编辑员工
+        </ol>
+
+        <div>
+
+                    <form th:action="@{/employee/updateEmployee}" method="post">
+                        <div th:each="emp:${employeeList}">
+                            <table>
+                                <tr>
+                                    <td>工号：</td>
+                                    <td><input type="text" readonly="readonly"
+                                               th:value="${emp.employeeAccount}" name="EmpAccount">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>姓名：</td>
+                                    <td><input type="text" th:value="${emp.employeeName}"
+                                               name="EmpName"></td>
+                                </tr>
+                                <tr>
+                                    <td>性别：</td>
+                                    <td><input type="text" th:value="${emp.employeeGender}"
+                                               name="EmpGender">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>年龄：</td>
+                                    <td><input type="text" th:value="${emp.employeeAge}"
+                                               name="EmpAge">
+                                    </td>
+
+                                    <td>职务：</td>
+                                    <td><input type="text" th:value="${emp.staff}"
+                                               name="staff">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>备注信息：</td>
+                                    <td><input type="text" th:value="${emp.employeeMessage}"
+                                               name="EmpMessage">
+                                    </td>
+                                </tr>
+                            </table>
+                            <div >
+                                <input type="submit" value="确认修改">
+                            </div>
+                        </div>
+                    </form>
+        </div>
+    </div>
+</main>

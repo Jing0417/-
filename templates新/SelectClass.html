@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-课程管理</title>
+</head>
+<body>
+
+<main>
+    <div>
+        <h1>课程管理</h1>
+        <ol>
+            <li>
+                         <a th:href="@{/toAdminMain}"></a>
+<!--                <a href="AdminMain.html" target="_self">回到主界面</a>-->
+            </li>
+            <li>课程管理</li>
+        </ol>
+        <div>
+            <div>
+                <i></i>
+                课程信息表
+            </div>
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>时间</th>
+                        <th>时长</th>
+                        <th>教练</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="class:${classList}">
+                        <td th:text="${class.classId}">编号</td>
+                        <td th:text="${class.className}">名称</td>
+                        <td th:text="${class.classBegin}">时间</td>
+                        <td th:text="${class.classTime}">时长</td>
+                        <td th:text="${class.coach}">教练</td>
+                        <td>
+                            <a th:href="@{/class/selClassOrder(classId=${class.classId})}">
+                                <input type="button" value="报名信息">
+                            </a>
+                            <a th:href="@{/class/delClass(classId=${class.classId})}"
+                            >
+                                <input type="button"
+                                       onclick="return del()" value="删除">
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+                        <a th:href="@{/class/toAddClass}">
+                            <input type="button" value="添加课程信息">
+                        </a>
+<!--            <a href="AddClass.html" target="_self">回到添加信息界面</a>-->
+        </div>
+    </div>
+</main>
+
+<script>
+    function del() {
+        let msg = "确定删除该课程么？（已报名的会员将无法查看次课程）";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-管理员主页</title>
+</head>
+<main>
+    <div>
+        <h1>管理员主页</h1>
+
+        <ol>
+            <li>主页</li>
+        </ol>
+        <li><a th:href="@{/toAdminMain}">退出登录</a></li>
+        <div>
+            <div>
+                <div>
+                    <div>健身房总人数为</div>
+                    <div>
+                        <span th:text="${humanTotal} + '人'"></span>
+                    </div>
+                </div>
+            </div>
+            <div>员工人数为</div>
+            <div>
+                <span th:text="${employeeTotal} + '人'"></span>
+            </div>
+
+            <div>会员人数为</div>
+            <div>
+                <span th:text="${memberTotal} + '人'"></span>
+            </div>
+            <div>器材数为</div>
+            <div>
+                <span th:text="${equipmentTotal} + '件'"></span>
+            </div>
+
+
+
+            <li><a th:href="@{/member/toSelByCard}">会员卡查询</a></li>
+            <li><a th:href="@{/member/selMember}">会员管理</a></li>
+            <li><a th:href="@{/employee/selEmployee}">员工管理</a></li>
+            <li><a th:href="@{/equipment/selEquipment}">器材管理</a></li>
+            <li><a th:href="@{/class/selClass}">课程管理</a></li>
+
+
+
+        </div>
+    </div>
+</main>
+
+
+</body>
+</html>

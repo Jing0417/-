@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>健身房管理系统-会员登陆</title>
+</head>
+<body>
+<main>
+    <div>
+        <h3>
+            <strong>欢迎来到会员登录界面</strong>
+        </h3>
+    </div>
+    <div>
+        <form th:action="@{/userLogin}" method="post" name="loginForm"
+              onsubmit="return checkSubmit(this)">
+            <div>
+                <label for="inputAccount">账号</label>
+                <input id="inputAccount" name="memberAccount" type="account"
+                       placeholder="Account"/>
+                <!--onkeypress被禁用-->
+
+            </div>
+            <div>
+                <label for="inputPassword">密码</label>
+                <input id="inputPassword" name="memberPassword"
+                       type="password"
+                       placeholder="Password"/>
+
+            </div>
+            <div>
+                <input id="inputRememberPassword" type="checkbox"
+                       value=""/>
+                <label for="inputRememberPassword">记住密码</label>
+            </div>
+            <div>
+                                <a th:href="@{/}">转到管理员登录</a>
+<!--                <a href="AdminLogin.html" target="_self">转换到管理员登录界面</a>-->
+                <input type="submit" value="登录">
+            </div>
+        </form>
+        <div th:text="${msg}"></div>
+    </div>
+
+</main>
+<script type="text/javascript">
+    function checkSubmit(loginForm) {
+        if (loginForm.memberAccount.value == '') {
+            alert("请输入账号");
+            loginForm.memberAccount.focus();
+            return false;
+        }
+        if (loginForm.memberPassword.value == '') {
+            alert("请输入密码");
+            loginForm.memberPassword.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+&copy 爬行者大队;
+<br>
+<a href="tencent://message/?uin=1054173274&Site=&Menu=yes">欢迎咨询QQ</a>
+</br>
+<br>
+<a href="https://github.com/Jing0417/Gym-Management-System"> <input type="image" src="../img/R-C%20(1).jpg" width="20"
+                                                                    height="20"></a>
+
+</br>
+</body>
+</html>

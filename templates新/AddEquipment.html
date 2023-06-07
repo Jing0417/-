@@ -1,0 +1,80 @@
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-添加器材</title>
+</head>
+<body>
+<main>
+    <div>
+        <h1>添加器材</h1>
+        <ol>
+                        <li><a th:href="@{/toAdminMain}">主页</a></li>
+                        <li><a th:href="@{/equipment/selEquipment}">器材管理</a></li>
+<!--            <li>-->
+<!--                <a href="AdminMain.html" target="_self">回到主界面</a>-->
+<!--            </li>-->
+<!--            <li>-->
+<!--                <a href="SelectEmp.html" target="_self">回到器材管理界面</a>-->
+<!--            </li>-->
+            添加器材
+        </ol>
+        <div>
+            <form th:action="@{/equipment/addEquipment}" method="post" name="addForm"
+                  onsubmit="return beforeSubmit(this)">
+                <table>
+                    <tr>
+                        <td>器材名称：</td>
+                        <td><input type="text" placeholder="名称" name="EquName"></td>
+                    </tr>
+
+                    <tr>
+                        <td>器材位置：</td>
+                        <td><input type="text" placeholder="x号房间" name="EquLocation">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>器材状态：</td>
+                        <td><input type="text" placeholder="状态" name="EquStatus">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>备注信息：</td>
+                        <td><input type="text" placeholder="备注" name="EquMessage">
+                        </td>
+                    </tr>
+                </table>
+                <div>
+                    <input type="submit" value="添加">
+                </div>
+                <div>
+                    <input type="reset" value="重置">
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+
+
+<script type="text/javascript">
+    function beforeSubmit(addForm) {
+        if (addForm.equipmentName.value == "") {
+            alert("请输入器材名称！")
+            return false;
+        }
+        if (addForm.equipmentLocation.value == "") {
+            alert("请输入器材位置！")
+            return false;
+        }
+        if (addForm.equipmentStatus.value == "") {
+            alert("请输入器材状态！")
+            return false;
+        }
+        if (addForm.equipmentMessage.value == "") {
+            alert("请输入备注信息！")
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>
