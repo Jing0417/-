@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-添加课程</title>
+</head>
+<body>
+<main>
+    <div>
+        <h1>添加课程</h1>
+                <li><a th:href="@{/toAdminMain}">主页</a></li>
+                <li><a th:href="@{/class/selClass}">课程管理</a></li>
+
+<!--        <li>-->
+<!--            <a href="AdminMain.html" target="_self">回到主界面</a>-->
+<!--        </li>-->
+<!--        <li>-->
+<!--            <a href="SelectClass.html" target="_self">回到课程管理界面</a>-->
+<!--        </li>-->
+        添加课程
+        <form th:action="@{/class/addClass}" method="post" name="addForm"
+              onsubmit="return beforeSubmit(this)">
+            <table>
+                <tr>
+                    <td>编号：</td>
+                    <td><input type="text" placeholder="4位编号" name="ClassId"></td>
+                </tr>
+                <tr>
+                    <td>名称：</td>
+                    <td><input type="text" laceholder="课程名称" name="ClassName">
+                    </td>
+                </tr>
+                <tr>
+                    <td>时间：</td>
+                    <td><input type="text" placeholder="年/月/日 00：00" name="ClassBegin">
+                    </td>
+                </tr>
+                <tr>
+                    <td>时长：</td>
+                    <td><input type="text" placeholder="xx分钟" name="ClassTime">
+                    </td>
+                </tr>
+                <tr>
+                    <td>教练：</td>
+                    <td><input type="text" placeholder="教练" name="coach">
+                    </td>
+                </tr>
+            </table>
+            <div>
+                <input type="submit" value="添加">
+            </div>
+            <div>
+                <input type="reset" value="重置">
+            </div>
+        </form>
+    </div>
+</main>
+
+<script type="text/javascript">
+    function beforeSubmit(addForm) {
+        if (addForm.classId.value == "") {
+            alert("请输入课程编号！")
+            return false;
+        }
+        if (addForm.className.value == "") {
+            alert("请输入课程名称！")
+            return false;
+        }
+        if (addForm.classBegin.value == "") {
+            alert("请输入课程时间！")
+            return false;
+        }
+        if (addForm.classTime.value == "") {
+            alert("请输入课程时长！")
+            return false;
+        }
+        if (addForm.coach.value == "") {
+            alert("请输入教练！")
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

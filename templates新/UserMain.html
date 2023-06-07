@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-会员主页</title>
+</head>
+<body>
+
+
+
+
+    <li><a th:href="@{/toUserMain}">退出登录</a></li>
+
+
+
+    <div>
+        <main>
+            <div>
+                <h1 class="mt-4" th:text="${member.memberName} + '的主页'"></h1>
+                <ol>
+                    <li>主页</li>
+                </ol>
+
+            </div>
+        </main>
+
+    </div>
+</div>
+
+
+
+        <li><a th:href="@{/user/toApplyClass}">报名选课</a></li>
+        <li><a th:href="@{/user/toUserClass}">我的课程</a></li>
+
+
+
+
+</body>
+</html>
+

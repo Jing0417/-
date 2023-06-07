@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-选课管理</title>
+</head>
+<body>
+
+        <main>
+            <div>
+                <h1>报名信息</h1>
+
+                <ol class="breadcrumb mb-4">
+                    <li><a th:href="@{/toAdminMain}">主页</a></li>
+                    <li><a th:href="@{/class/selClass}">课程管理</a></li>
+                    <li>报名信息</li>
+                </ol>
+
+                <div class="card mb-4">
+
+                    <!--当classOrderList为空（该课程无人报名）时显示-->
+                    <div th:if="${#lists.isEmpty(classOrderList)}">
+                        <table class="table table-hover">
+                            <tr>
+                                <td align="center">暂无报名信息！</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <!--当classOrderList不为空（该课程已有人报名）时显示-->
+                    <div th:if="${not #lists.isEmpty(classOrderList)}">
+                        <table class="table table-hover">
+                            <tr>
+                                <td>课程编号：</td>
+                                <td th:text="${classOrderList[0].classId}">课程编号</td>
+                            </tr>
+
+                            <tr>
+                                <td>课程名称：</td>
+                                <td th:text="${classOrderList[0].className}">课程名称</td>
+                            </tr>
+                            <tr>
+                                <td>开课时间：</td>
+                                <td th:text="${classOrderList[0].classBegin}">开课时间</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>报名会员：</strong></td>
+                            </tr>
+                            <tr th:each="order:${classOrderList}">
+                                <td th:text="${order.memberAccount}">无</td>
+                                <td th:text="${order.memberName}">无</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <a th:href="@{/class/selClass}">
+                        <input type="submit" value="返回">
+                    </a>
+                </div>
+            </div>
+        </main>
+
+</body>
+</html>

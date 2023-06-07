@@ -1,0 +1,65 @@
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-会员课程信息</title>
+</head>
+<body>
+
+<main>
+    <div>
+        <h1>我的课程</h1>
+        <ol>
+                                <li><a th:href="@{/toUserMain}">主页</a></li>
+<!--            <a href="UserMain.html" target="_self">回到会员主界面</a>-->
+            我的课程
+        </ol>
+        <div>
+            <div>
+                <i></i>
+                课程信息表
+            </div>
+            <div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>名称</th>
+                        <th>时间</th>
+                        <th>教练</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+
+                            <tbody>
+                            <tr th:each="class:${classOrderList}">
+                                <td th:text="${class.classId}">编号</td>
+                                <td th:text="${class.className}">名称</td>
+                                <td th:text="${class.classBegin}">时间</td>
+                                <td th:text="${class.coach}">教练</td>
+                                <td>
+                                    <a th:href="@{/user/delUserClass(classOrderId=${class.classOrderId})}"
+                                      >
+                                        <input type="button"
+                                               onclick="return del()" value="退课">
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+<script>
+    function del() {
+        let msg = "确定要退课吗？";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-员工管理</title>
+</head>
+<body>
+
+<main>
+    <div>
+        <h1>员工管理</h1>
+
+        <ol>
+                        <li><a th:href="@{/toAdminMain}">主页</a></li>
+<!--            <a href="AdminMain.html" target="_self">回到主界面</a>-->
+            员工管理
+        </ol>
+
+        <div>
+            <div>
+                <i></i>
+                员工信息表
+            </div>
+            <div>
+                <table id="datatablesSimple">
+                    <thead>
+                    <tr>
+                        <th>工号</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>入职时间</th>
+                        <th>职务</th>
+                        <th>备注信息</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="emp:${employeeList}">
+                        <td th:text="${emp.employeeAccount}">工号</td>
+                        <td th:text="${emp.employeeName}">姓名</td>
+                        <td th:text="${emp.employeeGender}">性别</td>
+                        <td th:text="${emp.employeeAge}">年龄</td>
+                        <td th:text="${emp.entryTime}">入职时间</td>
+                        <td th:text="${emp.staff}">职务</td>
+                        <td th:text="${emp.employeeMessage}">备注信息</td>
+                        <td>
+                            <a th:href="@{/employee/toUpdateEmployee(employeeAccount=${emp.employeeAccount})}">
+                                <input type="button" value="编辑">
+                            </a>
+                            <a th:href="@{/employee/delEmployee(employeeAccount=${emp.employeeAccount})}"
+                            >
+                                <input type="button" onclick="return del()" value="解雇">
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+                        <a th:href="@{/employee/toAddEmployee}">
+                            <input type="button" value="添加员工信息">
+                        </a>
+<!--            <a href="AddEmp.html" target="_self">回到添加员工信息界面</a>-->
+        </div>
+    </div>
+</main>
+
+<script>
+    function del() {
+        let msg = "确定要解雇该员工么？";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+</script>
+</body>
+</html>
