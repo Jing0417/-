@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-会员信息</title>
+    <style>
+        h1{
+            font-family: "Xingkai SC";
+            position: relative;
+            right:87px;
+            font-size:36px;
+        }
+        p{
+            position:relative;
+            bottom:-37px;
+            left: -580px;
+            text-indent: 1em;
+            width:2100px;
+            height:25px;
+            background-color: #f1f1f1;
+
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 25%;
+            background-color: #f1f1f1;
+            height: 100%; /* 全高 */
+            position: fixed; /* 使它产生粘性，即使在滚动时 */
+            overflow: auto; /* 如果侧栏的内容太多，则启用滚动条 */
+        }
+        li{
+            list-style: none;
+            font-size: 18px;
+            font-family: initial;
+            width: 360px;
+            height: 82px;
+        }
+        ul li a {
+            display: inline-block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+            width:328px;
+            height:52px;
+
+        }
+        ol li a{
+            display:block;
+            width:90px;
+            height:70px;
+        }
+
+        li a{
+            cursor: pointer;
+            color:grey;
+        }
+
+        li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        li a:hover{
+            background-color: #000000;
+            color: white;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #555;
+            color: white;
+        }
+        body{
+            margin:0;
+        }
+        .father_1{
+            margin-left:3%;
+            padding:14px 416px;
+            width:564.8px;
+            height:655px;
+        }
+
+        .layui-table{
+            position: relative;
+            top:-30px;
+            right:-300px;
+            width:649px;
+            height:450px;
+        }
+
+        /* 设置下拉按钮的样式 */
+        .dropbtn {
+            background-color: #f1f1f1;
+            color: black;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            width: 360px;
+            height:52px;
+            text-align: left;
+            text-indent:0.2em;
+        }
+
+        /* 容器 <div> - 需要放置下拉内容 */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 下拉内容（默认隐藏） */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 360px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        /* 下拉链接 */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* 悬停时更改下拉链接的颜色 */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+
+        /* 悬停时显示下拉菜单 */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* 显示下拉内容时，更改下拉按钮的背景颜色 */
+        .dropdown:hover .dropbtn {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .fulanfuzhu {
+            margin-bottom: 1.5rem;
+        }
+        form{
+            width:570px;
+            height:305px;
+            position: relative;
+            left:36px;
+            top:-256px;
+        }
+        .px-nav-fixed{
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+        }
+        .px-topnav{
+            padding-left: 0;
+            height: 56px;
+            z-index: 1039;
+        }
+        .navbar {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .navbar-expand {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+        }
+        .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
+            color: #fff;
+        }
+
+        .bg-dark {
+            background-color: #212529;
+
+        }
+        .px-topnav .navbar-brand {
+            width: 225px;
+            margin: 0;
+        }
+        .px-topnav.navbar-dark {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .px-ziti{
+            color:white;
+            font-weight: bold;
+            font-size:20px;
+            text-indent: 2em;
+        }
+
+        .bianji_btn_group {
+            display: inline-block;
+            vertical-align: middle;
+            /*将两个选择块分开间隙，避免用户点击错误*/
+            font-size: 20px;
+            position: relative;
+           left: 450px;
+        }
+        .bianji_btn{
+            display: inline-block;
+            vertical-align: middle;
+            height: 38px;
+            line-height: 43px;
+            border: 1px solid transparent;
+            border-left-color: transparent;
+            border-left-style: solid;
+            border-left-width: 2px;
+            padding: 0 18px;
+            background-color: #16baaa;
+            color: #fff;
+            white-space: nowrap;
+            text-align: center;
+            font-size: 14px;
+            border-radius: 2px;
+            cursor: pointer;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+        }
+
+    </style>
+    <link href="//unpkg.com/layui@2.8.4/dist/css/layui.css" rel="stylesheet">
+
+</head>
+
+
+<body class="px-nav-fixed">
+<nav class="px-topnav navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand px-ziti">健身房管理系统</a>
+</nav>
+<main>
+    <ul>
+
+        <!--    改链接-->
+        <li><a th:href=}">个人信息</a></li>
+        <div class="dropdown">
+            <button class="dropbtn">课程管理</button>
+            <div class="dropdown-content">
+                <a th:href="@{/user/toApplyClass}">报名选课</a>
+                <a th:href="@{/user/toUserClass}">我的课程</a>
+                <a th:href="@{/toUserMain}">退出登录</a></li>
+            </div>
+        </div>
+    </ul>
+    <div class="father_1">
+        <h1>会员信息</h1>
+
+
+        <ol class="fulanfuzhu">
+                    <li>
+                        <button style="cursor: pointer;width: 80px;height:50px;
+        border-radius:20px;transition : all 0.3s;"><a th:href="@{/toUserInfo}">主页</a> /  个人信息</button></li>
+
+                </ol>
+
+        <table class="layui-table" lay-size="sm">
+            <colgroup>
+                <col width="200px">
+                <col>
+            </colgroup>
+                        <tr>
+                            <td>会员账号/卡号：</td>
+                            <td th:text="${member.memberAccount}"></td>
+                        </tr>
+                        <tr>
+                            <td>姓名：</td>
+                            <td th:text="${member.memberName}"></td>
+                        </tr>
+                        <tr>
+                            <td>性别：</td>
+                            <td th:text="${member.memberGender}"></td>
+                        </tr>
+                        <tr>
+                            <td>年龄：</td>
+                            <td th:text="${member.memberAge}"></td>
+                        </tr>
+                        <tr>
+                            <td>联系方式：</td>
+                            <td th:text="${member.memberPhone}"></td>
+                        </tr>
+                        <tr>
+                            <td>身高：</td>
+                            <td th:text="${member.memberHeight}"></td>
+                        </tr>
+                        <tr>
+                            <td>体重：</td>
+                            <td th:text="${member.memberWeight}"></td>
+                        </tr>
+                        <tr>
+                            <td>办卡时间：</td>
+                            <td th:text="${member.cardTime}"></td>
+                        </tr>
+                        <tr>
+                            <td>剩余课时：</td>
+                            <td th:text="${member.cardNextClass}"></td>
+                        </tr>
+                    </table>
+       <div class="bianji_btn_group">
+  <button type="button" class="bianji_btn" value="编辑个人信息"> <a th:href="@{/user/toUpdateInfo}">编辑</a></button>
+  <button type="button" class="bianji_btn" value="删除个人信息">删除个人信息</button>
+</div>
+
+                </div>
+            </div>
+        </main>
+        <footer th:replace="userCommon::common-footer"></footer>
+    </div>
+</div>
+
+<div th:include="userCommon::common-scripts"></div>
+</body>
+</html>
