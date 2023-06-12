@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-器材管理</title>
+    <link href="//unpkg.com/layui@2.8.4/dist/css/layui.css" rel="stylesheet">
+
+    <style>
+        h1{
+            font-family: "Xingkai SC";
+            position: relative;
+            right:87px;
+            font-size:36px;
+        }
+        p{
+            position:relative;
+            bottom:-550px;
+            text-indent: 1em;
+            width:1500px;
+            height:25px;
+            background-color: #f1f1f1;
+        }
+        strong{
+            position:relative;
+            bottom:-510px;
+            font-size:24px;
+            text-indent: 3em;
+        }
+
+        div{
+            width:20px;
+            height:20px;
+            overflow：hidden;
+        }
+
+
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 25%;
+            background-color: #f1f1f1;
+            height: 100%; /* 全高 */
+            position: fixed; /* 使它产生粘性，即使在滚动时 */
+            overflow: auto; /* 如果侧栏的内容太多，则启用滚动条 */
+        }
+        li{
+            list-style: none;
+            font-size: 18px;
+            font-family: initial;
+            width: 360px;
+            height: 82px;
+            cursor: pointer;
+        }
+        ul li a {
+            display: inline-block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+            width:328px;
+            height:52px;
+
+        }
+        a:hover{
+            background-color: #0a53be;
+        }
+
+        li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        li a:hover{
+            background-color: #000000;
+            color: white;
+        }
+
+
+        li a:hover:not(.active) {
+            background-color: white;
+            color: blue;
+        }
+        body{
+            margin:0;
+        }
+
+
+        /* 设置下拉按钮的样式 */
+        .dropbtn {
+            background-color: #f1f1f1;
+            color: black;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            width: 360px;
+            height:52px;
+            text-align: left;
+            text-indent:0.2em;
+        }
+
+        /* 容器 <div> - 需要放置下拉内容 */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 下拉内容（默认隐藏） */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 360px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        /* 下拉链接 */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* 悬停时更改下拉链接的颜色 */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+
+        /* 悬停时显示下拉菜单 */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* 显示下拉内容时，更改下拉按钮的背景颜色 */
+        .dropdown:hover .dropbtn {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        form{
+            width:570px;
+            height:305px;
+            position: relative;
+            left:36px;
+            top:-156px;
+        }
+        .px-nav-fixed{
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+        }
+        .px-topnav{
+            padding-left: 0;
+            height: 56px;
+            z-index: 1039;
+        }
+        .navbar {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .navbar-expand {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+        }
+        .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
+            color: #fff;
+        }
+
+        .bg-dark {
+            background-color: #212529;
+
+        }
+        .px-topnav .navbar-brand {
+            width: 225px;
+            margin: 0;
+        }
+        .px-topnav.navbar-dark {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        .px-ziti{
+            color:white;
+            font-weight: bold;
+            font-size:20px;
+            text-indent: 2em;
+        }
+        .layui-table[lay-data], .layui-table[lay-options] {
+            display:inline-block;
+        }
+        .xiaopa-bg-gray {
+            background-color: #fafafa !important;
+            color: #5f5f5f !important;
+        }
+
+        .xiaopa-col-space15 {
+
+            margin: -7.5px;
+
+        }
+        .xiaopa-col-md6 {
+            position: relative;
+            display: block;
+            box-sizing: border-box;
+        }
+        .xiaopa-card:last-child {
+            margin-bottom: 0;
+        }
+        .xiaopa-card {
+            margin-bottom: 15px;
+            border-radius: 2px;
+            background-color: #fff;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+        }
+        .layui-card-header {
+            position: relative;
+            height: 42px;
+            line-height: 42px;
+            padding: 20px 15px;
+            border-bottom: 1px solid #f8f8f8;
+            color: #333;
+            border-radius: 2px 2px 0 0;
+            font-size: 14px;
+        }
+        .layui-card-body {
+            position: relative;
+            padding: 10px 15px;
+            line-height: 24px;
+
+        }
+        span {
+            padding:10px;
+
+        }
+    </style>
+
+</head>
+
+
+<body class="px-nav-fixed">
+<nav class="px-topnav navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand px-ziti">健身房管理系统</a>
+</nav>
+
+
+<ul>
+    <li><a th:href="@{/member/selMember}">会员管理</a></li>
+    <li><a th:href="@{/employee/selEmployee}">员工管理</a></li>
+    <li><a th:href="@{/equipment/selEquipment}">器材管理</a></li>
+    <li><a th:href="@{/class/selClass}">课程管理</a></li>
+    <li><a th:href="@{/toAdminMain}">退出登录</a></li>
+    <div class="dropdown">
+        <button class="dropbtn">爬行者更多功能</button>
+        <div class="dropdown-content">
+            <a href="#">开发中</a>
+            <a href="#">开发中</a>
+            <a href="#">开发中</a>
+        </div>
+    </div>
+</ul>
+
+
+<div class="father_1">
+    <h1 style="position:relative;right:-400px;width:200px;" >器材管理</h1>
+
+    <ol class="fulanfuzhu">
+        <li>
+            <button style="cursor: pointer;width: 80px;height:50px;
+        border-radius:20px;transition : all 0.3s;position: relative; right: -438px;top: 45px;">
+                <a th:href="@{/toAdminMain}">主页</a>
+            </button></li>
+<!--            <a href="AdminMain.html" target="_self">回到主界面</a>-->
+
+        </ol>
+
+
+        <div>
+            <div>
+                <i style="position:relative;right:-904px;top:-50px; width:200px; height:50px; display: inline-block">
+                    器材信息表
+                </i>
+
+            </div>
+
+            <div>
+                <table class="layui-table" lay-data="{height:315, url:'/static/2.8/json/table/user.json', page:true}"
+                       id="ID-table-demo-init" style="position: relative;right: -359px;top: 40px;width: 1100px;">
+                    <thead>
+
+                    <tr>
+                        <th lay-data="{field:'id', width:80, sort: true}" style="width: 170px;">器材id</th>
+                        <th lay-data="{field:'username', width:80}" style="width: 170px;">名称</th>
+                        <th lay-data="{field:'city', width:80}" style="width: 170px;">位置</th>
+                        <th lay-data="{field:'sex'}" style="width: 170px;">状态</th>
+                        <th lay-data="{field:'sign', minWidth: 150}" style="width: 170px;">备注信息</th>
+                        <th lay-data="{fixed: 'right', width: 160, align: 'center', toolbar: '#templet-demo-theads-tool'}"
+                            rowspan="2" style="width: 120px;">操作</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="equ:${equipmentList}">
+                        <td th:text="${equ.equipmentId}">id</td>
+                        <td th:text="${equ.equipmentName}">name</td>
+                        <td th:text="${equ.equipmentLocation}">location</td>
+                        <td th:text="${equ.equipmentStatus}">status</td>
+                        <td th:text="${equ.equipmentMessage}">message</td>
+                        <td>
+                            <a th:href="@{/equipment/toUpdateEquipment(equipmentId=${equ.equipmentId})}"
+                            >
+                                <input type="button"value="编辑">
+                            </a>
+                            <a th:href="@{/equipment/delEquipment(equipmentId=${equ.equipmentId})}"
+                            >
+                                <input type="button"
+                                       onclick="return del()" value="删除">
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+                                <a th:href="@{/equipment/addEquipment}" style="position: relative;right:-900px;top:390px;">
+                                    <input type="button"value="添加器材信息">
+                                </a>
+<!--            <a href="AddEqu.html" target="_self">回到添加器材信息界面</a>-->
+        </div>
+    </div>
+</main>
+
+<strong>你好，管理员！</strong>
+<p>欢迎回来</p>
+
+<p>Copyright &copy;爬行者大队</p>
+<footer th:replace="adminCommon::common-footer"></footer>
+<div th:include="adminCommon::common-scripts"></div>
+<script>
+    function del() {
+        let msg = "确定要删除该器材么？";
+        if (confirm(msg) == true) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    table.render({// 底部分页栏事件
+        table.on('pagebar(ID-table-demo-page)', function(obj){
+            var eventValue = obj.event; // 获得按钮 lay-event 值
+            layer.msg(eventValue);
+        });
+    });
+</script>
+</body>
+</html>
