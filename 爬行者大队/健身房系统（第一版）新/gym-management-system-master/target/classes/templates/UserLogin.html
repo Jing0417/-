@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>健身房管理系统-会员登陆</title>
+    <link href="//unpkg.com/layui@2.8.4/dist/css/layui.css" rel="stylesheet">
+    <style>
+        .h3biaoti{
+            line-height: 13;
+            font-size: 20px;
+            position: relative;
+            top:30px;
+            width:1276px;
+            height:260px;
+        }
+        #father{
+            width:1504px;
+            height:834px;
+            line-height: 53px;
+            border: 2px solid black;
+            text-indent: 3em;
+            text-align: center;
+            margin: 0 auto;
+            background-image:url("/images/img_2.jpg");
+            background-color: rgba(239, 237, 237, 0.15);
+            background-blend-mode:soft-light;
+            filter: contrast(85%);
+
+
+
+        }
+
+        .yonghuming{
+            width:1400px;
+            height:91px;
+            position: relative;
+            bottom: 519px;
+        }
+        .mima{
+            width:1400px;
+            height:91px;
+            position: relative;
+            bottom: 519px;
+        }
+        .layui-input{
+            width:232px;
+            position: relative;
+            right:-600px;
+            bottom: 85px;
+
+        }
+        .inputAccount{
+            position: relative;
+            right: -517px;
+            bottom: 50px;
+            color:black;
+            font-size: 20px;
+
+        }
+        .inputPassword{
+            position: relative;
+            right: -517px;
+            bottom: 78px;
+            font-size: 20px;
+        }
+        .layui-btn{
+            position: relative;
+            top: -578px;
+            right: -100px;
+        }
+
+        .zhuanhuanhuiyuan{
+
+        }
+        .denglu{
+            display: inline-block;
+            position: relative;
+            top: -604px;
+            left: 393px;
+            width:80px;
+            height:30px;
+            cursor: pointer;
+        }
+        .jizhumima{
+            display: inline-block;
+            float:left;
+            clear: both;
+            position: relative;
+            left:770px;
+            bottom:710px;
+        }
+        .banquan{
+            width:1276px;
+            height:53px;
+            position: relative;
+            top:-110px;
+            right:270px;
+        }
+        .paxingzhedadui{
+            position: relative;
+            right:-318px;
+           top:-380px;
+        }
+
+
+    </style>
+</head>
+<body>
+<main>
+    <div id="father" class="layui-anim layui-anim-scaleSpring">
+        <h3 class="h3biaoti">
+            <strong>欢迎来到会员登录界面</strong>
+        </h3>
+    </div>
+    <div>
+        <form th:action="@{/userLogin}" method="post" name="loginForm"
+              onsubmit="return checkSubmit(this)">
+            <div class="yonghuming">
+                <label class="inputAccount" for="inputAccount"> 账号
+                <img src="/images/yonghuming.png" alt="" style="vertical-align: middle; width: 20px; height:20px;">
+                </label>
+                    <input id="inputAccount" name="memberAccount" type="account"
+                           value="" lay-verify="required" placeholder="请 填 写 用 户 名" lay-reqtext="请填写用户名" autocomplete="off" class="layui-input" lay-affix="clear"/>
+                <!--onkeypress被禁用-->
+
+            </div>
+
+            <div class="mima">
+                <label class="inputPassword" for="inputPassword">密码
+                    <img src="/images/mima.jpg" alt="" style="vertical-align: middle; width: 20px; height:20px;">
+                </label>
+                <input id="inputPassword" name="memberPassword"
+                       type="password"
+                       value="" lay-verify="required" placeholder="请 输 入 密 码"
+                       lay-reqtext="请填写密码"
+                       autocomplete="off" class="layui-input" style="position: relative; bottom: 109px;" lay-affix="eye"/>
+
+            </div>
+
+            <div class="layui-col-xs5">
+                <div style="margin-left: 400px;width:150px;">
+                    <div class="zhuanhuanhuiyuan">
+                        <button type="button" class="layui-btn layui-btn-fluid layui-btn-primary"
+                                lay-on="reg-get-vercode" style="text-align: center;text-indent: -6px;">
+                            <a th:href="@{/}">转到管理员登录界面</a></button>
+                        <input type="submit" value="登录" class="denglu">
+                    </div>
+                </div>
+            </div>
+            <div class="jizhumima">
+                <input id="inputRememberPassword" type="checkbox"
+                       value=""/>
+                <label for="inputRememberPassword">记住密码</label>
+                <img src="/images/paidaxing.jpg" alt="" style="vertical-align: middle ;width:50px; height:50px;">
+            </div>
+
+        </form>
+        <div th:text="${msg}"></div>
+    </div>
+
+    <div class="banquan">
+        <!--增加作者区域-->
+        <div class="paxingzhedadui">
+            &nbsp&nbsp&nbsp&copy 爬行者大队;
+            <!--增加跳转github以及QQ链接-->
+        </div>
+        <button style="position: relative;
+         right: -300px;
+             top: -371px;">
+            <a href="tencent://message/?uin=1054173274&Site=&Menu=yes" style=" position: relative;
+                display:inline-block;
+            width:100px;
+            height:25px;
+            color:black;
+            text-align: center;
+            margin:0;
+            padding:6px;
+            ">
+                欢迎咨询QQ
+            </a>
+        </button>
+
+
+        <a href="https://github.com/Jing0417/Gym-Management-System"
+           style=" position: relative;
+            top:-251px;
+            right:-220px;
+            width:100px;
+            height:17px;">
+            <input type="image" src="/images/img.png" width="50px" height="50px">
+        </a>
+
+
+    </div>
+    </div>
+</main>
+<script type="text/javascript">
+    function checkSubmit(loginForm) {
+        if (loginForm.memberAccount.value == '') {
+            alert("请输入账号");
+            loginForm.memberAccount.focus();
+            return false;
+        }
+        if (loginForm.memberPassword.value == '') {
+            alert("请输入密码");
+            loginForm.memberPassword.focus();
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>
