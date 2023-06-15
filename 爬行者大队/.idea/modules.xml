@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/健身房系统（第一版）新/gym-management-system-master/gym-management-system.iml" filepath="$PROJECT_DIR$/健身房系统（第一版）新/gym-management-system-master/gym-management-system.iml" />
+=======
+>>>>>>> d67c3b9cd3d48459b28351f8cb59ac78a249096f
       <module fileurl="file://$PROJECT_DIR$/.idea/爬行者大队.iml" filepath="$PROJECT_DIR$/.idea/爬行者大队.iml" />
     </modules>
   </component>

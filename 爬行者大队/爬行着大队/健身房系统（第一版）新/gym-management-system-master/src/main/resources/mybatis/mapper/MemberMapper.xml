@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.Li.mapper.MemberMapper">
+
+    <resultMap id="memberMap" type="member">
+        <id property="memberAccount" column="VIP_Account"/>
+        <result property="memberPassword" column="VIP_password"/>
+        <result property="memberName" column="VIP_name"/>
+        <result property="memberGender" column="VIP_gender"/>
+        <result property="memberAge" column="VIP_age"/>
+        <result property="memberHeight" column="VIP_height"/>
+        <result property="memberWeight" column="VIP_weight"/>
+        <result property="memberPhone" column="VIP_phone"/>
+        <result property="cardTime" column="VIP_time"/>
+        <result property="cardClass" column="VIP_class"/>
+        <result property="cardNextClass" column="VIP_next_class"/>
+    </resultMap>
+
+    <select id="FindVIP" resultMap="memberMap">
+        SELECT *
+        FROM VIP
+    </select>
+
+    <insert id="addVIP" parameterType="member">
+        INSERT INTO VIP (VIP_Account, VIP_name, VIP_gender, VIP_age, VIP_height,
+                         VIP_weight, VIP_phone, VIP_time, VIP_class,
+                         VIP_next_class)
+        VALUES (#{memberAccount}, #{memberName}, #{memberGender}, #{memberAge}, #{memberHeight},
+                #{memberWeight}, #{memberPhone}, #{cardTime}, #{cardClass}, #{cardNextClass})
+    </insert>
+
+    <update id="modifyVIPInfo" parameterType="member">
+        UPDATE VIP
+        SET VIP_Account  = #{memberAccount},
+            VIP_password = #{memberPassword},
+            VIP_name     = #{memberName},
+            VIP_gender   = #{memberGender},
+            VIP_age      = #{memberAge},
+            VIP_height   = #{memberHeight},
+            VIP_weight   = #{memberWeight},
+            VIP_phone    = #{memberPhone},
+            VIP_class      = #{cardClass},
+            VIP_next_class = #{cardNextClass}
+        WHERE VIP_Account = #{memberAccount}
+    </update>
+
+    <select id="selectByAccountAndPassword" resultMap="memberMap">
+        SELECT *
+        FROM VIP
+        WHERE VIP_Account = #{memberAccount}
+          AND VIP_password = #{memberPassword}
+    </select>
+
+    <delete id="DelbyVIPid" parameterType="java.lang.Integer">
+        DELETE
+        FROM VIP
+        WHERE VIP_Account = #{memberAccount}
+    </delete>
+
+    <select id="FindVIPbyid" parameterType="java.lang.Integer" resultMap="memberMap">
+        SELECT *
+        FROM VIP
+        WHERE VIP_Account = #{memberAccount}
+    </select>
+
+    <select id="VIPTotal" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM VIP
+    </select>
+
+</mapper>

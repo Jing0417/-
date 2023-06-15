@@ -1,0 +1,364 @@
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>健身房管理系统-添加器材</title>
+    <style>
+        h1 {
+            font-family: "Xingkai SC";
+            position: relative;
+            right:37px;
+            font-size: 36px;
+        }
+        p {
+            position: relative;
+            bottom: -319px;
+            text-indent: 1em;
+            width: 2400px;
+            height: 25px;
+            background-color: #f1f1f1;
+            right:1px;
+        }
+
+        strong {
+            position: relative;
+            bottom: -269px;
+            font-size: 24px;
+            text-indent: 3em;
+            left:5px;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 25%;
+            background-color: #f1f1f1;
+            height: 100%; /* 全高 */
+            position: fixed; /* 使它产生粘性，即使在滚动时 */
+            /* 如果侧栏的内容太多，则启用滚动条 */
+        }
+
+        li {
+            list-style: none;
+            font-size: 18px;
+            font-family: initial;
+            width: 360px;
+            height: 82px;
+        }
+
+        li a {
+            display: block;
+            color: #000;
+            padding: 8px 16px;
+            text-decoration: none;
+            width: 328px;
+            height: 52px;
+
+        }
+
+        li a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        li a:hover {
+            background-color: #000000;
+            color: white;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #555;
+            color: white;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        .father_1 {
+            margin-left: 3%;
+            padding: 14px 416px;
+
+        }
+
+        /*副栏*/
+        .fulan {
+            display: flex;
+            padding: 0 0;
+            margin-bottom: 1rem;
+            list-style: none;
+            position: relative;
+            left: 2px;
+            top: 16px;
+            width: 127px;
+            cursor: pointer;
+        }
+
+        .fulanfuzhu {
+            margin-bottom: 1.5rem;
+        }
+
+        .layui-form-item {
+            padding: 10px;
+            position: relative;
+            top: 84px;
+            right: -300px;
+
+        }
+
+        /* 设置下拉按钮的样式 */
+        .dropbtn {
+            background-color: #f1f1f1;
+            color: black;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            width: 360px;
+            height: 52px;
+            text-align: left;
+            text-indent: 0.2em;
+        }
+
+        /* 容器 <div> - 需要放置下拉内容 */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 下拉内容（默认隐藏） */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 360px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        /* 下拉链接 */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* 悬停时更改下拉链接的颜色 */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+
+        /* 悬停时显示下拉菜单 */
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* 显示下拉内容时，更改下拉按钮的背景颜色 */
+        .dropdown:hover.dropbtn {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        form {
+            width: 570px;
+            height: 305px;
+            position: relative;
+            left: -96px;
+            top: -21px;
+        }
+
+        .px-nav-fixed {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+        }
+
+        .px-topnav {
+            padding-left: 0;
+            height: 56px;
+            z-index: 1039;
+        }
+
+        .navbar {
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .navbar-expand {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+        }
+
+        .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
+            color: #fff;
+        }
+
+        .bg-dark {
+            background-color: #212529;
+
+        }
+
+        .px-topnav .navbar-brand {
+            width: 225px;
+            margin: 0;
+        }
+
+        .px-topnav.navbar-dark {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .px-ziti {
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            text-indent: 2em;
+        }
+
+    </style>
+    <link href="//unpkg.com/layui@2.8.4/dist/css/layui.css" rel="stylesheet">
+</head>
+<body class="px-nav-fixed">
+<nav class="px-topnav navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand px-ziti">健身房管理系统</a>
+</nav>
+<main>
+    <ul>
+        <li><a th:href="@{/member/selMember}">会员管理</a></li>
+        <li><a th:href="@{/employee/selEmployee}">员工管理</a></li>
+        <li><a th:href="@{/equipment/selEquipment}">器材管理</a></li>
+        <li><a th:href="@{/class/selClass}">课程管理</a></li>
+        <div class="dropdown">
+            <button class="dropbtn">爬行者更多功能</button>
+            <div class="dropdown-content">
+                <a href="#">开发中</a>
+                <a href="#">开发中</a>
+                <a href="#">开发中</a>
+            </div>
+        </div>
+    </ul>
+
+    <div class="father_1">
+        <h1>添加器材</h1>
+        <ol class="fulan">
+            <li><a th:href="@{/toAdminMain}">主页</a></li>
+            <li><a th:href="@{/equipment/selEquipment}">器材管理</a></li>
+
+
+        </ol>
+        <div>
+
+            <form th:action="@{/equipment/addEquipment}" method="post" name="addForm"
+                  onsubmit="return beforeSubmit(this)">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">器材名称:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="equipmentName" lay-verify="title" autocomplete="off"
+                               placeholder="器材名字"
+                               class="layui-input" style="width:300px;" required >
+                    </div>
+                </div>
+
+              <!--  <div class="layui-form-item">
+                    <label class="layui-form-label">器材位置:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="equipmentLocation" lay-verify="title" autocomplete="off"
+                               placeholder="x房间"
+                               class="layui-input" style="width:300px;">
+                    </div>
+                </div>-->
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">器材位置:</label>
+                    <div class="layui-input-block">
+                        <select name="equipmentLocation" class="layui-input" style="width:300px;">
+                            <option value="">请选择</option>
+                            <option value="1号房间">1号房间</option>
+                            <option value="2号房间">2号房间</option>
+                            <option value="3号房间">3号房间</option>
+                            <option value="4号房间">4号房间</option>
+                            <option value="5号房间">5号房间</option>
+                        </select>
+                    </div>
+                </div>
+
+              <!--  <div class="layui-form-item">
+                    <label class="layui-form-label">器材状态:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="equipmentStatus" lay-verify="title" autocomplete="off"
+                               placeholder="状态"
+                               class="layui-input" style="width:300px;">
+                    </div>
+                </div>-->
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">器材状态:</label>
+                    <div class="layui-input-block">
+                        <select name="equipmentStatus" class="layui-input" style="width:300px;">
+                            <option value="">请选择</option>
+                            <option value="正常">正常</option>
+                            <option value="维修中">维修中</option>
+                            <option value="待维修">待维修</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">器材备注:</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="equipmentMessage" autocomplete="off" placeholder="备注"
+                               class="layui-input" style="width:300px;">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button type="submit" class="layui-btn" lay-submit lay-filter="demo-val" value="添加">立即提交
+                        </button>
+                        <button type="reset" class="layui-btn layui-btn-primary" value="重置">重置</button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</main>
+
+</div>
+</div>
+<script type="text/javascript">
+    function beforeSubmit(addForm) {
+        if (addForm.equipmentName.value == "") {
+            alert("请输入器材名称！")
+            return false;
+        }
+        if (addForm.equipmentLocation.value == "") {
+            alert("请输入器材位置！")
+            return false;
+        }
+        if (addForm.equipmentStatus.value == "") {
+            alert("请输入器材状态！")
+            return false;
+        }
+        if (addForm.equipmentMessage.value == "") {
+            alert("请输入备注信息！")
+            return false;
+        }
+        return true;
+    }
+</script>
+<strong>你好，管理员！</strong>
+<p>欢迎回来</p>
+
+<p>Copyright &copy;爬行者大队</p>
+</body>
+</html>
