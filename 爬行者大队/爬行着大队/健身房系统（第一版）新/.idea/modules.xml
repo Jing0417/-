@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/1-源项目.iml" filepath="$PROJECT_DIR$/.idea/1-源项目.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gym-management-system-master/gym-management-system.iml" filepath="$PROJECT_DIR$/gym-management-system-master/gym-management-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaweb-session-cookie/javaweb-session-cookie.iml" filepath="$PROJECT_DIR$/javaweb-session-cookie/javaweb-session-cookie.iml" />
+    </modules>
+  </component>
+</project>
